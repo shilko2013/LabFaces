@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean(name = "results")
 @SessionScoped
@@ -30,7 +31,24 @@ public class Results {
         sessionID = session.getId();
     }
 
-    public int addResult(double x, double y, double r, boolean check) {
+    public int addResult() {
+        Map<String, String> requestParameterMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String xstr = requestParameterMap.get("form:param-x_input");
+        String ystr = requestParameterMap.get("form:param-y");
+        String rstr = requestParameterMap.get("form:param-r");
+        double x;
+        double y;
+        double r;
+        try {
+            x = Double.parseDouble(xstr.replace(',', '.'));
+            y = Double.parseDouble(ystr.replace(',', '.'));
+            r = Double.parseDouble(rstr.replace(',', '.'));
+        } catch (Exception e) {
+            return -1;
+        }
+        if (!MatchingManager.valid(x,y,r))
+            return -1;
+        boolean check = MatchingManager.match(x,y,r);
         StringBuilder result = new StringBuilder();
         result.append("INSERT INTO ");
         result.append(TABLE_NAME);
@@ -40,11 +58,11 @@ public class Results {
         result.append(y);
         result.append(",");
         result.append(r);
-        result.append(",");
+        result.append(",'");
         result.append(check);
-        result.append(",");
+        result.append("','");
         result.append(sessionID);
-        result.append(");");
+        result.append("');");
         try {
             return connection.createStatement().executeUpdate(result.toString());
         } catch (Exception e) {

@@ -7,7 +7,7 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough" xmlns:H="http://java.sun.com/jsf/html">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>Лаба 3</title>
     <h:outputStylesheet name="style-check.css" library="css"/>
@@ -34,6 +34,7 @@
             <tr>
                 <td>
                     <h:form id="form">
+                        <p:remoteCommand name="formSubmit" action="#{results.addResult}" />
                         <fieldset>
                             <legend style="text-align: left;"><span class="check-text">Данные для проверки</span>
                             </legend>
@@ -74,7 +75,8 @@
                                         </h:inputText>
                                     </td>
                                     <td>
-                                        <p:spinner min="-4" max="4" value="0" stepFactor="0.5" id="param-x" required="true"
+                                        <p:spinner min="-4" max="4" value="0" stepFactor="0.5" id="param-x"
+                                                   required="true"
                                                    requiredMessage="Неверная координата X, пожалуйста, повторите ввод.">
                                             <c:validator validatorId="com.shilko.ru.faces.validator.XValidator"/>
                                         </p:spinner>
@@ -87,7 +89,6 @@
                                             <c:validator validatorId="com.shilko.ru.faces.validator.YValidator"/>
                                         </h:inputText>
                                     </td>
-
                                 </tr>
                                 <tr>
                                     <td><h:message for="param-r" style="color:red"/></td>

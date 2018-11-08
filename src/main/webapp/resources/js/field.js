@@ -4,7 +4,12 @@ const r = 45;
 const extraValue = 90;
 
 function canvasSubmit(event) {
-    document.getElementById("form").submit();
+    formSubmit({
+        "param-x": $("#param-x").val(),
+        "param-y": $("#param-y").val(),
+        "param-r": $("#param-r").val()
+    });
+    //document.getElementById("form").submit();
 }
 
 function drawPoints() {
