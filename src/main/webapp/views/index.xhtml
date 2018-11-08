@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://java.sun.com/jsf/html">
+
+<h:head>
+    <h:outputStylesheet name="style.css" library="css"/>
+    <h:outputScript name="jquery-3.3.1.js" library="js"/>
+    <h:outputScript name="clock.js" library="js"/>
+</h:head>
+
+<h:body>
+    <header>
+        <table class="rounded-corners">
+            <tr>
+                <td colspan="2"><h1>Лабораторная работа №3</h1></td>
+            </tr>
+            <tr>
+                <td colspan="2"><h2>Подготовил Шилко Даниил Сергеевич</h2></td>
+            </tr>
+            <tr>
+                <td><h3 class="right-header">Группа: Р3201</h3></td>
+                <td><h3 class="left-header">Вариант: 18129</h3></td>
+            </tr>
+        </table>
+    </header>
+    <br/>
+    <article>
+        <canvas id="clock" title="Часы" width="300px" height="300px"></canvas>
+        <br/>
+        <br/>
+        <p:commandButton action="check" id="check-button" value="Перейти на страницу проверки"/>
+    </article>
+</h:body>
+</html>

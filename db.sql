@@ -3,5 +3,6 @@ CREATE TABLE results (
     x double precision not null,
     y double precision not null,
     r double precision not null,
-    checking boolean not null
+    checking boolean not null,
+    sessionID bigint not null
 );
