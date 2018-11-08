@@ -111,20 +111,21 @@ canvas#canvas {
     transition: transform ease-in-out 1s;
 }
 
-#check-button {
+.check-button {
     height: 30px;
     width: 200px;
     border-radius: 15px;
     border: 3px solid #03799D;
     background-color: #03899C;
     color: #FFAE00;
-    padding: 0 2% 0 2%;
+    padding-right: 3px;
+    padding-left: 3px;
     outline: none;
     text-shadow: 1px 1px 2px #FF1300;
     font-weight: bold;
     cursor: pointer;
 }
 
-#check-button:active {
+.check-button:active {
     background-color: #5FC0CE;
 }
