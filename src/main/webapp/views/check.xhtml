@@ -1,1 +1,160 @@
-<!--xmlns:p="http://primefaces.org/ui-->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+    <title>Лаба 3</title>
+    <h:outputStylesheet name="style-check.css" library="css"/>
+    <h:outputScript name="jquery-3.3.1.js" library="js"/>
+    <h:outputScript name="sort_table.js" library="js"/>
+</head>
+<body>
+<article>
+    <br/>
+    <table>
+        <tr>
+            <td colspan="2">
+                <div id="description">Эта страница предназначена для проверки
+                    вхождения точки с координатами <span class="param">X</span>
+                    и <span class="param">Y</span> в область,
+                    отмеченную на графике синим цветом. Для начала работы
+                    выберите нужные значения <span class="param">X</span>, <span class="param">Y</span>,
+                    параметра <span class="param">R</span>
+                    и нажмите на кнопку <span class="check-text">Проверить</span> или выберите значения
+                    параметра <span class="param">R</span> и нажмите на <span class="check-text">График</span>,
+                    <span class="param">X</span> и <span class="param">Y</span> будут взяты с графика.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form id="form" action="${pageContext.request.contextPath}/index.html" method="GET">
+                    <fieldset>
+                        <legend style="text-align: left;"><span class="check-text">Данные для проверки</span></legend>
+                        <table rules="groups">
+                            <colgroup>
+                                <col/>
+                                <col/>
+                                <col/>
+                            </colgroup>
+                            <colgroup>
+                                <col/>
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th colspan="5"></th>
+                            </tr>
+                            </thead>
+                            <tbody onclick="clickTable(event);">
+                            <tr>
+                                <td colspan="3" style="width: 35%">
+                                    Координата <span class="param">X</span>
+                                </td>
+                                <td>
+                                    Координата <span class="param">Y</span>
+                                </td>
+                                <td>
+                                    Параметр <span class="param">R</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="button" class="param-button" disabled>-3</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="param-button">-2</button>
+                                </td>
+                                <td>
+                                    <button type="button" class="param-button">-1</button>
+                                </td>
+                                <td>
+                                    <h:inputText id="param-y" name="param-y" title="Целое или дробное число"
+                                           a:placeholder="Введите число от -3 до 3"
+                                           maxlength="16">
+                                        <c:validator validatorId="com.shilko.ru.faces.validator.YValidator" />
+                                    </h:inputText>
+                                </td>
+                                <td>
+                                    <h:inputText id="param-r" name="param-r" title="Целое или дробное число"
+                                           a:placeholder="Введите число от 1 до 4"
+                                           maxlength="16">
+                                        <c:validator validatorId="com.shilko.ru.faces.validator.RValidator" />
+                                    </h:inputText>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    0
+                                </td>
+                                <td rowspan="2">
+                                    1
+                                </td>
+                                <td rowspan="2">
+                                    2
+                                </td>
+                                <td><h:message for="param-y" style="color:red" /></td>
+                                <td><h:message for="param-r" style="color:red" /></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">
+                                    3
+                                </td>
+                                <td rowspan="2">
+                                    4
+                                </td>
+                                <td rowspan="2">
+                                    5
+                                </td>
+                                <td rowspan="2">
+                                    6
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <p align="center"><span class="check-text">График области:</span></p>
+    <canvas id="canvas" onclick="canvasSubmit(event);" title="График области" width="360px" height="360px"></canvas>
+    <br/>
+    <table class="article-table" rules="all" id="result-table">
+        <colgroup style="background-color: #21cfda">
+            <col/>
+            <col/>
+            <col/>
+        </colgroup>
+        <colgroup style="background-color: #51c7da">
+            <col/>
+        </colgroup>
+        <thead onclick="sort(event);">
+        <tr id="table-header">
+            <th>X <span class="sort-symbol">⮃</span></th>
+            <th>Y <span class="sort-symbol">⮃</span></th>
+            <th>R <span class="sort-symbol">⮃</span></th>
+            <th data-type="reverse">Попадание <span class="sort-symbol">⮃</span></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</article>
+</body>
+</html>

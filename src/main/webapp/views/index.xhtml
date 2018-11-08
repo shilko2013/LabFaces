@@ -5,16 +5,16 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsf/core"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://java.sun.com/jsf/html">
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-    <h:outputStylesheet name="style.css" library="css"/>
+    <title>Лаба 3</title>
+    <h:outputStylesheet name="style-index.css" library="css"/>
     <h:outputScript name="jquery-3.3.1.js" library="js"/>
     <h:outputScript name="clock.js" library="js"/>
 </h:head>
 
-<h:body>
+<body>
     <header>
         <table class="rounded-corners">
             <tr>
@@ -34,7 +34,7 @@
         <canvas id="clock" title="Часы" width="300px" height="300px"></canvas>
         <br/>
         <br/>
-        <p:commandButton action="check" id="check-button" value="Перейти на страницу проверки"/>
+        <h:commandButton action="check" id="check-button" value="Перейти на страницу проверки"/>
     </article>
-</h:body>
+</body>
 </html>

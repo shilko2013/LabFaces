@@ -117,8 +117,17 @@ function paintClocks() {
 
 $(() => {
     paintClocks();
+    addHover();
 });
 
 setInterval(() => {
     paintClocks();
 }, 5000);
+
+function addHover() {
+    $("canvas").hover(function() {
+        $(this).attr("title", new Date().toLocaleString());
+    }, function() {
+        $(this).attr("title", new Date().toLocaleString());
+    });
+}
