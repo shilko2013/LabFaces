@@ -1,5 +1,5 @@
 CREATE TABLE results (
-    id serial primary key,
+    id bigserial primary key,
     x double precision not null,
     y double precision not null,
     r double precision not null,

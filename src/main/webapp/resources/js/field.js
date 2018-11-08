@@ -9,7 +9,7 @@ function canvasSubmit(event) {
         "param-y": $("#param-y").val(),
         "param-r": $("#param-r").val()
     });
-    //document.getElementById("form").submit();
+    document.getElementById("form").submit();
 }
 
 function drawPoints() {
