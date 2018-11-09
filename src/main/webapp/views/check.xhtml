@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:c="http://java.sun.com/jsf/core"
@@ -35,8 +35,8 @@
             </tr>
             <tr>
                 <td>
-                    <h:form id="form">
-                        <p:remoteCommand name="formSubmit" action="#{results.addResult}"/>
+                    <h:form id="form" method="GET">
+                        <p:remoteCommand name="formSubmit" update="result-table" action="#{results.addResult}"/>
                         <fieldset>
                             <legend style="text-align: left;"><span class="check-text">Данные для проверки</span>
                             </legend>
@@ -115,7 +115,7 @@
         <p align="center"><span class="check-text">График области:</span></p>
         <canvas id="canvas" onclick="canvasSubmit(event);" title="График области" width="270px" height="270px"></canvas>
         <br/>
-        <table class="article-table" rules="all" id="result-table">
+        <!--<table class="article-table" rules="all" id="result-table">
             <colgroup style="background-color: #21cfda">
                 <col/>
                 <col/>
@@ -156,7 +156,38 @@
                 </jstl:otherwise>
             </jstl:choose>
             </tbody>
-        </table>
+        </table>-->
+        <h:dataTable value = "#{results.allResults}" var = "result"
+                     styleClass = "article-table"
+                     rules="all" id="result-table">
+
+            <h:column>
+                <c:facet name = "header">X <span class="sort-symbol">⮃</span></c:facet>
+                #{result.x}
+            </h:column>
+
+            <h:column>
+                <c:facet name = "header">Y <span class="sort-symbol">⮃</span></c:facet>
+                #{result.y}
+            </h:column>
+
+            <h:column>
+                <c:facet name = "header">R <span class="sort-symbol">⮃</span></c:facet>
+                #{result.r}
+            </h:column>
+
+            <h:column>
+                <c:facet name = "header">Попадание <span class="sort-symbol">⮃</span></c:facet>
+                <jstl:choose>
+                    <jstl:when test="#{result.match}">
+                        <span id="yes">да</span>
+                    </jstl:when>
+                    <jstl:otherwise>
+                        <span id="no">нет</span>
+                    </jstl:otherwise>
+                </jstl:choose>
+            </h:column>
+        </h:dataTable>
     </article>
 </h:body>
 </html>

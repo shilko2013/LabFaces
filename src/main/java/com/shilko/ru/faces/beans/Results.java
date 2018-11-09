@@ -75,7 +75,7 @@ public class Results {
         List<ResultRow> resultRows = new ArrayList<ResultRow>();
         try {
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME +
-                    " WHERE sessionID = " + sessionID + ";");
+                    " WHERE sessionID = '" + sessionID + "';");
             while (resultSet.next()) {
                 ResultRow resultRow = new ResultRow();
                 resultRow.setX(resultSet.getString("x"));
@@ -95,7 +95,7 @@ public class Results {
     private void clearResults() {
         try {
             connection.createStatement().executeUpdate("DELETE FROM " + TABLE_NAME +
-                    " WHERE sessionID = " + sessionID + ";");
+                    " WHERE sessionID = '" + sessionID + "';");
         } catch (Exception e) {
             e.printStackTrace();
         }

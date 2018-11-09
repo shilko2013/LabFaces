@@ -129,3 +129,7 @@ canvas#canvas {
 .check-button:active {
     background-color: #5FC0CE;
 }
+
+.article-table {
+    background-color: #21cfda;
+}

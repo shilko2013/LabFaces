@@ -34,11 +34,13 @@ function drawPoints() {
 
     ctx.fillStyle = "#FFAE00";
     let values = $("#result-table td").toArray();
-    for (let i = 0; i < values.length / 4; ++i) {
-        ctx.beginPath();
-        ctx.arc(values[i * 4].innerText * r / values[i * 4 + 2].innerText + width / 2, -values[i * 4 + 1].innerText * r / values[i * 4 + 2].innerText + hight / 2, 2, 0, Math.PI * 2, false);
-        ctx.stroke();
-        ctx.fill();
+    if (values.length > 3) {
+        for (let i = 0; i < values.length / 4; ++i) {
+            ctx.beginPath();
+            ctx.arc(values[i * 4].innerText * r / values[i * 4 + 2].innerText + width / 2, -values[i * 4 + 1].innerText * r / values[i * 4 + 2].innerText + hight / 2, 2, 0, Math.PI * 2, false);
+            ctx.stroke();
+            ctx.fill();
+        }
     }
 
     drawBase(ctx);

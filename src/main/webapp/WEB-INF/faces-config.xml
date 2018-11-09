@@ -8,11 +8,11 @@
         <from-view-id>/views/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>check</from-outcome>
-            <to-view-id>/WEB-INF/views/check.xhtml</to-view-id>
+            <to-view-id>/views/check.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/WEB-INF/views/check.xhtml</from-view-id>
+        <from-view-id>/views/check.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/views/index.xhtml</to-view-id>
