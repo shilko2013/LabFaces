@@ -35,15 +35,15 @@
             </tr>
             <tr>
                 <td>
-                    <h:form id="form" method="GET">
-                        <p:remoteCommand name="formSubmit" update="result-table" action="#{results.addResult}"/>
+                    <h:form id="form">
+                        <p:remoteCommand name="formSubmit" update="result-table form" action="#{results.addResult}"/>
                         <fieldset>
                             <legend style="text-align: left;"><span class="check-text">Данные для проверки</span>
                             </legend>
                             <table rules="groups">
                                 <thead>
                                 <tr>
-                                    <th colspan="3"></th>
+                                    <th colspan="3"/>
                                 </tr>
                                 </thead>
                                 <colgroup>
@@ -113,53 +113,11 @@
         </div>
 
         <p align="center"><span class="check-text">График области:</span></p>
-        <canvas id="canvas" onclick="canvasSubmit(event);" title="График области" width="270px" height="270px"></canvas>
+        <canvas id="canvas" onclick="canvasSubmit(event);" title="График области" width="270px" height="270px"/>
         <br/>
-        <!--<table class="article-table" rules="all" id="result-table">
-            <colgroup style="background-color: #21cfda">
-                <col/>
-                <col/>
-                <col/>
-            </colgroup>
-            <colgroup style="background-color: #51c7da">
-                <col/>
-            </colgroup>
-            <thead onclick="sort(event);">
-            <tr id="table-header">
-                <th>X <span class="sort-symbol">⮃</span></th>
-                <th>Y <span class="sort-symbol">⮃</span></th>
-                <th>R <span class="sort-symbol">⮃</span></th>
-                <th data-type="reverse">Попадание <span class="sort-symbol">⮃</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            <jstl:choose>
-                <jstl:when test="#{results.allResults.size() == 0}">
-                    <div align="center">Здесь будут храниться данные о предыдущих точках</div>
-                </jstl:when>
-                <jstl:otherwise>
-                    <ui:repeat var="item" value="#{results.allResults}">
-                        <tr>
-                            <td>#{item.x}</td>
-                            <td>#{item.y}</td>
-                            <td>#{item.r}</td>
-                            <jstl:choose>
-                                <jstl:when test="#{item.match}">
-                                    <span id="yes">да</span>
-                                </jstl:when>
-                                <jstl:otherwise>
-                                    <span id="no">нет</span>
-                                </jstl:otherwise>
-                            </jstl:choose>
-                        </tr>
-                    </ui:repeat>
-                </jstl:otherwise>
-            </jstl:choose>
-            </tbody>
-        </table>-->
         <h:dataTable value = "#{results.allResults}" var = "result"
                      styleClass = "article-table"
-                     rules="all" id="result-table">
+                     rules="all" id="result-table" >
 
             <h:column>
                 <c:facet name = "header">X <span class="sort-symbol">⮃</span></c:facet>

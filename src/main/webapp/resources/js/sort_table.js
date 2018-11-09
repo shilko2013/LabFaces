@@ -35,7 +35,7 @@ class Sort {
                     if (!this._pressed[numberOfColumn])
                         result *= -1;
                     return result;
-                }
+                };
                 break;
             case "reverse":
                 sortfn = (left, right) => {
@@ -49,7 +49,7 @@ class Sort {
                     if (!this._pressed[numberOfColumn])
                         result *= -1;
                     return -result;
-                }
+                };
                 break;
             case "string":
             default:
@@ -64,7 +64,7 @@ class Sort {
                     if (!this._pressed[numberOfColumn])
                         result *= -1;
                     return result;
-                }
+                };
                 break;
         }
         this._pressed[numberOfColumn] = !this._pressed[numberOfColumn];

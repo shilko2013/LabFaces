@@ -9,7 +9,6 @@ function canvasSubmit(event) {
         "param-y": $("#param-y").val(),
         "param-r": $("#param-r").val()
     });
-    document.getElementById("form").submit();
 }
 
 function drawPoints() {
@@ -95,11 +94,15 @@ function drawBase(ctx) {
 
 $(() => {
     drawPoints();
-    $("#result-table tr").mouseover((event) => {
-        if (event.currentTarget.id == "table-header")
+    setListeners();
+});
+
+function setListeners() {
+    $(document).on("mouseover","#result-table tr",(event) => {
+        let values = $(event.currentTarget).find("td").toArray();
+        if (values.length < 4)
             return;
         event.currentTarget.style.backgroundColor = "#5FB0CF"; //#5FC0CE - #FFF
-        let values = $(event.currentTarget).find("td").toArray();
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext("2d");
         ctx.fillStyle = "red";
@@ -107,11 +110,12 @@ $(() => {
         ctx.arc(values[0].innerText * r / values[2].innerText + width / 2, -values[1].innerText * r / values[2].innerText + hight / 2, 2, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.fill();
-    }).mouseout((event) => {
-        if (event.currentTarget.id == "table-header")
+    });
+    $(document).on("mouseout","#result-table tr",(event) => {
+        let values = $(event.currentTarget).find("td").toArray();
+        if (values.length < 4)
             return;
         event.currentTarget.style.backgroundColor = null;
-        let values = $(event.currentTarget).find("td").toArray();
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext("2d");
         ctx.fillStyle = "#FFAE00";
@@ -121,4 +125,7 @@ $(() => {
         ctx.fill();
         drawPoints();
     });
-});
+    $(document).on("click","#result-table thead",(event) => {
+        sort(event);
+    });
+}
