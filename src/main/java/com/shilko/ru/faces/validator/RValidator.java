@@ -19,8 +19,8 @@ public class RValidator implements Validator {
                 throw new IllegalArgumentException();
         } catch (Exception e) {
             FacesMessage msg =
-                    new FacesMessage("Y validation failed.",
-                            "Неверная координата Y, пожалуйста, повторите ввод.");
+                    new FacesMessage("R validation failed.",
+                            "Неверный параметр R, пожалуйста, повторите ввод.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }

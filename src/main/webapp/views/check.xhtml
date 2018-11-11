@@ -36,7 +36,8 @@
             <tr>
                 <td>
                     <h:form id="form">
-                        <p:remoteCommand name="formSubmit" update="result-table form" action="#{results.addResult}"/>
+                        <p:remoteCommand name="formSubmit" update="result-table form" action="#{results.addResult}"
+                                         oncomplete="drawPoints();"/>
                         <fieldset>
                             <legend style="text-align: left;"><span class="check-text">Данные для проверки</span>
                             </legend>
@@ -72,14 +73,15 @@
                                         <h:inputText id="param-r" name="param-r" title="Целое или дробное число"
                                                      a:placeholder="Введите число от 1 до 4"
                                                      maxlength="16" required="true"
-                                                     requiredMessage="Неверная координата R, пожалуйста, повторите ввод.">
+                                                     requiredMessage="Неверный параметр R, пожалуйста, повторите ввод.">
                                             <c:validator validatorId="com.shilko.ru.faces.validator.RValidator"/>
                                         </h:inputText>
                                     </td>
                                     <td>
                                         <p:spinner min="-4" max="4" value="0" stepFactor="0.5" id="param-x"
                                                    required="true"
-                                                   requiredMessage="Неверная координата X, пожалуйста, повторите ввод.">
+                                                   requiredMessage="Неверная координата X, пожалуйста, повторите ввод."
+                                                   title="Одно из значений: -4, -3.5, -3, -2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4">
                                             <c:validator validatorId="com.shilko.ru.faces.validator.XValidator"/>
                                         </p:spinner>
                                     </td>
@@ -113,37 +115,31 @@
         </div>
 
         <p align="center"><span class="check-text">График области:</span></p>
-        <canvas id="canvas" onclick="canvasSubmit(event);" title="График области" width="270px" height="270px"/>
+        <canvas id="canvas" onclick="canvasSubmit(event);" title="График области" width="400px" height="400px"/>
         <br/>
-        <h:dataTable value = "#{results.allResults}" var = "result"
-                     styleClass = "article-table"
-                     rules="all" id="result-table" >
-
+        <h:dataTable value="#{results.allResults}" var="result"
+                     styleClass="article-table"
+                     rules="all" id="result-table">
             <h:column>
-                <c:facet name = "header">X <span class="sort-symbol">⮃</span></c:facet>
+                <c:facet name="header">X <span class="sort-symbol">⮃</span></c:facet>
                 #{result.x}
             </h:column>
-
             <h:column>
-                <c:facet name = "header">Y <span class="sort-symbol">⮃</span></c:facet>
+                <c:facet name="header">Y <span class="sort-symbol">⮃</span></c:facet>
                 #{result.y}
             </h:column>
-
             <h:column>
-                <c:facet name = "header">R <span class="sort-symbol">⮃</span></c:facet>
+                <c:facet name="header">R <span class="sort-symbol">⮃</span></c:facet>
                 #{result.r}
             </h:column>
-
             <h:column>
-                <c:facet name = "header">Попадание <span class="sort-symbol">⮃</span></c:facet>
-                <jstl:choose>
-                    <jstl:when test="#{result.match}">
-                        <span id="yes">да</span>
-                    </jstl:when>
-                    <jstl:otherwise>
-                        <span id="no">нет</span>
-                    </jstl:otherwise>
-                </jstl:choose>
+                <c:facet name="header">Попадание <span class="sort-symbol">⮃</span></c:facet>
+                <h:panelGroup rendered="#{result.match}">
+                    <span id="yes">да</span>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{!result.match}">
+                    <span id="no">нет</span>
+                </h:panelGroup>
             </h:column>
         </h:dataTable>
     </article>
