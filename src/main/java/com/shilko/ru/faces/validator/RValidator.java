@@ -7,7 +7,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("com.shilko.ru.faces.validator.RValidator")
+@FacesValidator("RValidator")
 public class RValidator implements Validator {
     private static final double minR = 1;
     private static final double maxR = 4;

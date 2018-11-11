@@ -7,7 +7,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator("com.shilko.ru.faces.validator.YValidator")
+@FacesValidator("YValidator")
 public class YValidator implements Validator {
     private static final double minY = -3;
     private static final double maxY = 3;

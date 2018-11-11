@@ -9,26 +9,37 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
 
 @ManagedBean(name = "results")
 @SessionScoped
 public class Results {
     private final Connection connection;
-    private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/postgres";
+    /*private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/postgres";
     private static final String USER = "postgres";
+    private static final String PASS = "iaq150";*/
+    private static final String DB_URL = "jdbc:postgresql://pg:5432/studs";
+    private static final String USER = "s243853";
     private static final String PASS = "iaq150";
     private static final String TABLE_NAME = "results";
     private final String sessionID;
+    private final Logger logger;
 
     {
         connection = new JDBCManager(DB_URL, USER, PASS, true).getConnection();
         FacesContext fCtx = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fCtx.getExternalContext().getSession(false);
         sessionID = session.getId();
+        logger = Logger.getLogger("logger");
+        try {
+            logger.addHandler(new FileHandler("log.txt"));
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        }
     }
 
     public int addResult() {
@@ -36,6 +47,9 @@ public class Results {
         String xstr = requestParameterMap.get("form:param-x_input");
         String ystr = requestParameterMap.get("form:param-y");
         String rstr = requestParameterMap.get("form:param-r");
+        logger.info("X=" + xstr);
+        logger.info("Y=" + ystr);
+        logger.info("R" + rstr);
         double x;
         double y;
         double r;
@@ -46,9 +60,9 @@ public class Results {
         } catch (Exception e) {
             return -1;
         }
-        if (!MatchingManager.valid(x,y,r))
+        if (!MatchingManager.valid(x, y, r))
             return -1;
-        boolean check = MatchingManager.match(x,y,r);
+        boolean check = MatchingManager.match(x, y, r);
         StringBuilder result = new StringBuilder();
         result.append("INSERT INTO ");
         result.append(TABLE_NAME);
@@ -63,11 +77,13 @@ public class Results {
         result.append("','");
         result.append(sessionID);
         result.append("');");
+        logger.info("try");
         try {
             return connection.createStatement().executeUpdate(result.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.info("added");
         return -1;
     }
 
@@ -85,7 +101,7 @@ public class Results {
                 resultRows.add(resultRow);
             }
             resultSet.close();
-        } catch (SQLException exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
         return resultRows;
