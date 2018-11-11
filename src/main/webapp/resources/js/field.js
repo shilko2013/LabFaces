@@ -4,11 +4,7 @@ const r = 45;
 const extraValue = 0;
 
 function canvasSubmit(event) {
-    formSubmit({
-        "param-x": $("#param-x").val(),
-        "param-y": $("#param-y").val(),
-        "param-r": $("#param-r").val()
-    });
+    formSubmit();
 }
 
 function getCustomR() {
@@ -46,7 +42,7 @@ function drawPoints() {
     let values = $("#result-table td").toArray();
     if (values.length > 3)
         for (let i = 0; i < values.length / 4; ++i) {
-            allPointExist = allPointExist && drawPoint(ctx,
+            allPointExist &= drawPoint(ctx,
                 values[i * 4].innerText,
                 values[i * 4 + 1].innerText,
                 values[i * 4 + 2].innerText,
