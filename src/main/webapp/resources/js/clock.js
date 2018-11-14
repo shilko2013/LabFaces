@@ -26,10 +26,10 @@ function paintClock(name, width, height) {
     drawMarkers(ctx, width, height);
 
     ctx.beginPath();
-    ctx.moveTo(width / 2 - (width / 2 - 130) * Math.cos(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * time.getSeconds()) * (Math.PI / 180)),
-        height / 2 + (height / 2 - 130) * Math.sin(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * time.getSeconds()) * (Math.PI / 180)));
-    ctx.lineTo(width / 2 + (width / 2 - 15) * Math.cos(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * time.getSeconds()) * (Math.PI / 180)),
-        height / 2 - (height / 2 - 15) * Math.sin(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * time.getSeconds()) * (Math.PI / 180)));
+    ctx.moveTo(width / 2 - (width / 2 - 130) * Math.cos(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * (time.getSeconds()+(time.getMilliseconds()/1000))) * (Math.PI / 180)),
+        height / 2 + (height / 2 - 130) * Math.sin(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * (time.getSeconds()+(time.getMilliseconds()/1000))) * (Math.PI / 180)));
+    ctx.lineTo(width / 2 + (width / 2 - 15) * Math.cos(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * (time.getSeconds()+(time.getMilliseconds()/1000))) * (Math.PI / 180)),
+        height / 2 - (height / 2 - 15) * Math.sin(Math.PI / 2 - 6 * (time.getMinutes() + (1 / 60) * (time.getSeconds()+(time.getMilliseconds()/1000))) * (Math.PI / 180)));
     ctx.stroke();
 
     ctx.lineWidth = 5;
@@ -42,7 +42,7 @@ function paintClock(name, width, height) {
     ctx.lineWidth = 3;
 
     ctx.strokeStyle = "red";
-    drawLine(ctx, 110, 10, time.getSeconds(), width, height);
+    drawLine(ctx, 110, 10, (time.getSeconds()+(time.getMilliseconds()/1000)), width, height);
 
     ctx.strokeStyle = "black";
     ctx.fillStyle = "yellow";
@@ -122,7 +122,7 @@ $(() => {
 
 setInterval(() => {
     paintClocks();
-}, 5000);
+}, 50);
 
 function addHover() {
     $("canvas").hover(function() {

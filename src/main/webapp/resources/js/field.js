@@ -4,6 +4,17 @@ const r = 45;
 const extraValue = 0;
 
 function canvasSubmit(event) {
+    let rect = $("#canvas")[0].getBoundingClientRect();
+    let paramR = $("input[name$='param-r']").val();
+    let x = (event.clientX - rect.left - width / 2) / getCustomR() * paramR;
+    let y = (hight / 2 - (event.clientY - rect.top)) / getCustomR() * paramR;
+    if (x < -4)
+        x = -5; //magic value for validation failed
+    if(x > 4)
+        x = 5; //magic value for validation failed
+    x = (Math.round(x*2)*1.)/2;
+    $("input[name*='param-x']").val(x);
+    $("input[name$='param-y']").val(y);
     formSubmit();
 }
 

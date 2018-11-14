@@ -12,7 +12,8 @@
       xmlns:jstl="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <title>Лаба 3</title>
-    <meta http-equiv="refresh" content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/views/index.xhtml"/>
+    <meta http-equiv="refresh"
+          content="#{facesContext.externalContext.sessionMaxInactiveInterval};url=#{request.contextPath}/views/index.xhtml"/>
     <h:outputStylesheet name="style-check.css" library="css"/>
     <h:outputScript name="jquery-3.3.1.js" library="js"/>
     <h:outputScript name="sort_table.js" library="js"/>
@@ -38,8 +39,7 @@
                 <td>
                     <h:form id="form">
                         <p:remoteCommand name="formSubmit" update="result-table form" action="#{results.addResult}"
-                                         oncomplete="drawPoints();" onerror="document.location.reload(true);"
-                                         resetValues="true"/>
+                                         oncomplete="drawPoints();" onerror="document.location.reload(true);"/>
                         <fieldset>
                             <legend style="text-align: left;"><span class="check-text">Данные для проверки</span>
                             </legend>
@@ -76,7 +76,7 @@
                                                      a:placeholder="Введите число от 1 до 4"
                                                      maxlength="16" required="true"
                                                      requiredMessage="Неверный параметр R, пожалуйста, повторите ввод."
-                                        validator="RValidator">
+                                                     validator="RValidator">
                                             <!--<c:validator validatorId="RValidator"/>-->
                                         </h:inputText>
                                     </td>
@@ -103,6 +103,14 @@
                                     <td><h:message for="param-r" style="color:red"/></td>
                                     <td><h:message for="param-x" style="color:red"/></td>
                                     <td><h:message for="param-y" style="color:red"/></td>
+                                </tr>
+                                <tr>
+                                    <td/>
+                                    <td><h:commandButton type="submit" styleClass="check-button"
+                                                         value="Отправить" update="result-table form" action="#{results.addResult}"
+                                                         oncomplete="drawPoints();" onerror="document.location.reload(true);"/>
+                                    </td>
+                                    <td/>
                                 </tr>
                                 </tbody>
                             </table>
