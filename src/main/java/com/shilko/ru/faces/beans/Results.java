@@ -19,12 +19,12 @@ import java.util.logging.Logger;
 @SessionScoped
 public class Results {
     private final Connection connection;
-    private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/postgres";
+    /*private static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/postgres";
     private static final String USER = "postgres";
-    private static final String PASS = "iaq150";
-    /*private static final String DB_URL = "jdbc:postgresql://pg:5432/studs";
-    private static final String USER = "s243853";
     private static final String PASS = "iaq150";*/
+    private static final String DB_URL = "jdbc:postgresql://pg:5432/studs";
+    private static final String USER = "s243853";
+    private static final String PASS = "iaq150";
     private static final String TABLE_NAME = "results";
     private final String sessionID;
     private final Logger logger;
